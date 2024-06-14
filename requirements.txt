@@ -1,6 +1,5 @@
 Django~=5.1a1
 django-debug-toolbar
-mysqlclient
 django-dump-die
 pandas~=2.2.2
 numpy~=1.26.4
