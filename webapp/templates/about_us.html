@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="mx-auto mt-4 max-w-screen-sm text-center">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold">Meet Our Team</h2>
+            <p class="font-light text-gray-500 lg:mb-10 sm:text-xl">These people work on making our product best</p>
+        </div>
+        <div class="mx-auto pt-8 justify-center items-center">
+            <div class="flex items-center justify-center space-x-6">
+                <!-- Card 1 -->
+                <div class="group pt-50 h-72 w-56 [perspective:1000px]">
+                    <div class="relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                        <div class="absolute inset-0">
+                            <img class="h-full w-full rounded-xl object-cover shadow-xl shadow-black/40"
+                                 src="{% static 'maul.jpg' %}"
+                                 alt="Card 1"/>
+                        </div>
+                        <div class="absolute inset-0 h-full w-full rounded-xl bg-black/80 px-4 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                            <div class="flex h-full flex-col items-center justify-center">
+                                <h1 class="text-lg font-bold">Maulana Yusuf A.</h1>
+                                <p class="text-sm">21106050011</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group h-72 w-56 [perspective:1000px]">
+                    <div class="relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                        <div class="absolute inset-0">
+                            <img class="h-full w-full rounded-xl object-cover shadow-xl shadow-black/40"
+                                 src="{% static 'indra.jpg' %}"
+                                 alt="Card 1"/>
+                        </div>
+                        <div class="absolute inset-0 h-full w-full rounded-xl bg-black/80 px-4 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                            <div class="flex h-full flex-col items-center justify-center">
+                                <h1 class="text-lg font-bold">Indra Arya S. P.</h1>
+                                <p class="text-sm">21106050002</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group h-72 w-56 [perspective:1000px]">
+                    <div class="relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                        <div class="absolute inset-0">
+                            <img class="h-full w-full rounded-xl object-cover shadow-xl shadow-black/40"
+                                 src="{% static 'amir.jpg' %}"
+                                 alt="Card 1"/>
+                        </div>
+                        <div class="absolute inset-0 h-full w-full rounded-xl bg-black/80 px-4 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                            <div class="flex h-full flex-col items-center justify-center">
+                                <h1 class="text-lg font-bold">Muammar Mufid D.</h1>
+                                <p class="text-sm">21106050007</p>
+                                <p class="text-xs">Ketua Kelas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="group h-72 w-56 [perspective:1000px]">
+                    <div class="relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                        <div class="absolute inset-0">
+                            <img class="h-full w-full rounded-xl object-cover shadow-xl shadow-black/40"
+                                 src="{% static '3.jpg' %}"
+                                 alt="Card 1"/>
+                        </div>
+                        <div class="absolute inset-0 h-full w-full rounded-xl bg-black/80 px-4 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                            <div class="flex h-full flex-col items-center justify-center">
+                                <h1 class="text-lg font-bold">Zulfahmi M. Ardianto</h1>
+                                <p class="text-sm">21106050009</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="group h-72 w-56 [perspective:1000px]">
+                    <div class="relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                        <div class="absolute inset-0">
+                            <img class="h-full w-full rounded-xl object-cover shadow-xl shadow-black/40"
+                                 src="{% static 'levi.jpg' %}"
+                                 alt="Card 1"/>
+                        </div>
+                        <div class="absolute inset-0 h-full w-full rounded-xl bg-black/80 px-4 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                            <div class="flex h-full flex-col items-center justify-center">
+                                <h1 class="text-lg font-bold">Levianita Rahmawati</h1>
+                                <p class="text-sm">21106050037</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

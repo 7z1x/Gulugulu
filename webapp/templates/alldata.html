@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- component -->
+        <div class="overflow-hidden align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 shadow-lg px-12">
+            <div class="flex justify-between">
+                <form method="get" action="{% url 'alldata_search' %}"
+                      class="inline-flex border rounded w-7/12 px-2 lg:px-6 h-12 bg-transparent">
+                    <div class="flex flex-wrap items-stretch w-full h-full mb-6 relative">
+                        <div class="flex">
+                        <span class="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-none lg:px-3 py-2 whitespace-no-wrap text-sm">
+                            <svg width="18" height="18" class="w-4 lg:w-auto" viewBox="0 0 18 18" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.11086 15.2217C12.0381 15.2217 15.2217 12.0381 15.2217 8.11086C15.2217 4.18364 12.0381 1 8.11086 1C4.18364 1 1 4.18364 1 8.11086C1 12.0381 4.18364 15.2217 8.11086 15.2217Z"
+                                      stroke="#455A64" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M16.9993 16.9993L13.1328 13.1328" stroke="#455A64" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                        </div>
+                        <input type="text" name="q"
+                               class="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs lg:text-base font-thin"
+                               placeholder="Search" value="{{ request.GET.q }}">
+                    </div>
+                </form>
+                <!-- Open the modal using ID.showModal() method -->
+                <button class="btn btn-outline btn-info" onclick="my_modal_2.showModal()">Stopword</button>
+                <dialog id="my_modal_2" class="modal">
+                    <div class="modal-box">
+                        <h3 class="text-lg justify-center flex items-center pb-2 border-2"><strong>Stopword</strong>
+                        </h3>
+                        <ul class="pt-3">
+                            {% for word in stop_words %}
+                                <li class="flex items-center justify-center">{{ word }}</li>
+                                <div class="divider"></div>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <form method="dialog" class="modal-backdrop">
+                        <button>close</button>
+                    </form>
+                </dialog>
+            </div>
+        </div>
+
+        <!-- Scrollable container for the table -->
+        <div class="align-middle inline-block min-w-full shadow overflow-hidden shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg"
+             style="max-height: 500px; overflow-y: auto;">
+
+            {% if not makanan %}
+                <div class="flex justify-center items-center h-64">
+                    <p class="text-xl font-semibold">Data tidak ditemukan</p>
+                </div>
+            {% else %}
+                <table class="min-w-full">
+                    <thead>
+                    <tr>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 align-middle uppercase tracking-wider whitespace-nowrap font-semibold">
+                            Nama Makanan
+                        </th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 align-middle uppercase tracking-wider whitespace-nowrap font-semibold">
+                            Bahan
+                        </th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 align-middle uppercase tracking-wider whitespace-nowrap font-semibold">
+                            Deskripsi
+                        </th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 align-middle uppercase tracking-wider whitespace-nowrap font-semibold">
+                            Aksi
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for mkn in makanan %}
+                        <tr>
+                            <th class="border-t-0 px-6 align-middle border-l-0 border-b border-r-0 border-gray-500 text-xs whitespace-nowrap p-4">{{ mkn.nama }}</th>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">{{ mkn.bahan }}</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">{{ mkn.deskripsi }}</td>
+                            <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
+                                <button class="bg-red-500 active:bg-red-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 text-white"
+                                        type="button" onclick="openModal('{{ mkn.id }}')">Hapus
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
+                    <div>
+                        <p class="text-sm leading-5 ">
+                            Showing
+                            <span class="font-medium">{{ makanan.start_index }}</span>
+                            to
+                            <span class="font-medium">{{ makanan.end_index }}</span>
+                            of
+                            <span class="font-medium">{{ makanan.paginator.count }}</span>
+                            results
+                        </p>
+                    </div>
+
+                    <div>
+                        <nav class="relative z-0 inline-flex shadow-sm">
+                            <div>
+                                {% if makanan.has_previous %}
+                                    <a href="?page={{ makanan.previous_page_number }}"
+                                       class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 text-sm leading-5 font-medium hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
+                                       aria-label="Previous">
+                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                  clip-rule="evenodd"></path>
+                                        </svg>
+                                    </a>
+                                {% else %}
+                                    <span class="inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 text-sm leading-5 font-medium focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500">
+                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                              d="M10.707 14.707a1 1 0 01-1.414 0L6.586 11.5l-.793.707 4.5 5a1 1 0 001.414 0l4.5-5-.793-.707-3.121 3.121z"
+                                              clip-rule="evenodd"></path>
+                                        <path fill-rule="evenodd"
+                                              d="M10.707 5.293a1 1 0 011.414 0L14.914 8.5l.793-.707-4.5-5a1 1 0 00-1.414 0l-4.5 5 .793.707 3.121-3.121z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </span>
+                                {% endif %}
+                            </div>
+                            <div>
+                                {% for page_num in makanan.paginator.page_range %}
+                                    <a href="?page={{ page_num }}"
+                                       class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-tertiary active:text-gray-700 transition ease-in-out duration-150 hover:bg-tertiary">{{ page_num }}</a>
+                                {% endfor %}
+                            </div>
+                            <div>
+                                {% if makanan.has_next %}
+                                    <a href="?page={{ makanan.next_page_number }}"
+                                       class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
+                                       aria-label="Next">
+                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                  clip-rule="evenodd"></path>
+                                        </svg>
+                                    </a>
+                                {% else %}
+                                    <span class="inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500">
+                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                              d="M10.707 14.707a1 1 0 01-1.414 0L6.586 11.5l-.793.707 4.5 5a1 1 0 001.414 0l4.5-5-.793-.707-3.121 3.121z"
+                                              clip-rule="evenodd"></path>
+                                        <path fill-rule="evenodd"
+                                              d="M10.707 5.293a1 1 0 011.414 0L14.914 8.5l.793-.707-4.5-5a1 1 0 00-1.414 0l-4.5 5 .793.707 3.121-3.121z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </span>
+                                {% endif %}
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+    <!-- Modal -->
+    <div id="deleteModal"
+         class="hidden fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-8">
+            <h2 class="text-2xl mb-4">Konfirmasi Hapus</h2>
+            <p class="mb-8">Apakah Anda yakin ingin menghapus item ini?</p>
+            <div class="flex justify-end">
+                <button class="bg-gray-500 text-white px-4 py-2 rounded mr-2" type="button" onclick="closeModal()">
+                    Batal
+                </button>
+                <a id="confirmDeleteButton" class="bg-red-500 text-white px-4 py-2 rounded" href="#">Hapus</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+    <script>
+        function openModal(id) {
+            document.getElementById('confirmDeleteButton').setAttribute('href', '/deletemakanan/' + id);
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('deleteModal').classList.add('hidden');
+        }
+    </script>
+{% endblock scripts %}

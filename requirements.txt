@@ -1,0 +1,12 @@
+Django~=5.1a1
+django-debug-toolbar
+mysqlclient
+django-dump-die
+pandas~=2.2.2
+numpy~=1.26.4
+nltk~=3.8.1
+scikit-learn~=1.5.0
+Sastrawi~=1.0.1
+fuzzywuzzy~=0.18.0
+PyMySQL~=1.1.1
+dj-database-url==2.0.0
