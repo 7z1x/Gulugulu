@@ -2,12 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "STKI_SearchEngine/wsgi.py",
+      "src": "config/wsgi.py",
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "15mb",
-        "runtime": "python3.9",
-        "buildCommand": "apt-get update && apt-get install -y python3-dev default-libmysqlclient-dev build-essential && pip3.12 install --disable-pip-version-check --target . --upgrade -r requirements.txt"
+        "runtime": "python3.9"
       }
     }
   ],
@@ -18,7 +17,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "STKI_SearchEngine/wsgi.py"
+      "dest": "config/wsgi.py"
     }
   ]
 }
