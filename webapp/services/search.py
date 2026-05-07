@@ -15,14 +15,22 @@ from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFacto
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
+import os
+
 # ---------------------------------------------------------------------------
 # NLP tools (di-inisialisasi sekali saat module pertama kali di-import)
 # ---------------------------------------------------------------------------
+# Tambahkan direktori /tmp untuk Vercel (karena filesystem Vercel read-only)
+nltk_data_dir = '/tmp/nltk_data'
+os.makedirs(nltk_data_dir, exist_ok=True)
+if nltk_data_dir not in nltk.data.path:
+    nltk.data.path.append(nltk_data_dir)
+
 _stemmer = StemmerFactory().create_stemmer()
 _stop_words = StopWordRemoverFactory().get_stop_words()
 
-nltk.download('punkt', quiet=True)
-nltk.download('punkt_tab', quiet=True)
+nltk.download('punkt', download_dir=nltk_data_dir, quiet=True)
+nltk.download('punkt_tab', download_dir=nltk_data_dir, quiet=True)
 
 
 def get_stop_words():
