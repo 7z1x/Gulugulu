@@ -10,11 +10,11 @@ Faker==25.8.0
 fuzzywuzzy==0.18.0
 joblib==1.4.2
 Levenshtein==0.25.1
-mysqlclient==2.2.4
+
 nltk==3.8.1
 numpy==1.26.4
 pandas==2.2.2
-psycopg2==2.9.9
+psycopg2-binary==2.9.9
 PyMySQL==1.1.1
 python-dateutil==2.9.0.post0
 python-Levenshtein==0.25.1
