@@ -1,0 +1,31 @@
+name: System Health Check
+
+on:
+  schedule:
+    # Berjalan setiap 5 hari sekali pada jam 00:00 UTC 
+    # (Pengecekan rutin untuk memastikan status koneksi sistem)
+    - cron: '0 0 */5 * *'
+  workflow_dispatch: # Mengizinkan untuk di-run secara manual dari tab Actions
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify API Connectivity
+        env:
+          # Kamu bisa memasukkan PROJECT_URL di Settings -> Secrets and variables -> Actions
+          TARGET_URL: ${{ secrets.PROJECT_URL }}
+        run: |
+          echo "Memanggil $TARGET_URL ..."
+          
+          # Melakukan request untuk memastikan endpoint utama berjalan normal
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$TARGET_URL")
+          
+          echo "HTTP Status Code: $STATUS_CODE"
+          
+          if [ "$STATUS_CODE" -ge 200 ] && [ "$STATUS_CODE" -lt 400 ]; then
+            echo "✅ System check passed."
+          else
+            echo "❌ System check failed."
+            exit 1
+          fi
