@@ -4,7 +4,7 @@ on:
   schedule:
     # Berjalan setiap 5 hari sekali pada jam 00:00 UTC 
     # (Pengecekan rutin untuk memastikan status koneksi sistem)
-    - cron: '0 0 */5 * *'
+    - cron: '0 0 */2 * *'
   workflow_dispatch: # Mengizinkan untuk di-run secara manual dari tab Actions
 
 jobs:
