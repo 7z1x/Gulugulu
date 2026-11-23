@@ -6,12 +6,12 @@
 
 <p align="center">
   Indonesian food search engine powered by TF-IDF &amp; Cosine Similarity.<br>
-  <strong><a href="#usage">Explore Gulugulu usage Â»</a></strong>
+  <strong><a href="#usage">Explore Gulugulu usage &#187;</a></strong>
   <br><br>
   <a href="https://github.com/7z1x/Gulugulu/issues/new?labels=bug&template=bug_report.md">Report bug</a>
-  Â·
+  &#183;
   <a href="https://github.com/7z1x/Gulugulu/issues/new?labels=enhancement&template=feature_request.md">Request feature</a>
-  Â·
+  &#183;
   <a href="https://github.com/7z1x/Gulugulu">Repository</a>
 </p>
 
@@ -27,8 +27,8 @@
 ## Overview
 
 **Gulugulu** is a web-based search engine built to retrieve information about traditional
-Indonesian food. It implements classical **Information Retrieval** techniques â€” **TF-IDF**
-weighting combined with **Cosine Similarity** â€” on a curated dataset of 101 dishes, and
+Indonesian food. It implements classical **Information Retrieval** techniques -- **TF-IDF**
+weighting combined with **Cosine Similarity** -- on a curated dataset of 101 dishes, and
 enhances the experience with Indonesian stemming (Sastrawi), fuzzy matching fallback, and
 a dark/light theme.
 
@@ -36,38 +36,38 @@ The project was originally built for the *Sistem Temu Kembali Informasi (STKI)* 
 
 ### How it works
 
-1. **Query input** â€” the user types a food name, ingredient, or description.
-2. **Preprocessing** â€” excess whitespace is trimmed; Indonesian stop words are removed.
-3. **Stemming** â€” words are reduced to their root form using **Sastrawi**.
-4. **TF-IDF vectorization** â€” each term is weighted across the 101-document corpus.
-5. **Cosine Similarity** â€” the angle between the query vector and every document vector is measured.
-6. **Ranking** â€” results are sorted by relevance weight; the top 5 are returned.
-7. **Fuzzy fallback** â€” when no match is found, **FuzzyWuzzy/RapidFuzz** suggests the closest
+1. **Query input** -- the user types a food name, ingredient, or description.
+2. **Preprocessing** -- excess whitespace is trimmed; Indonesian stop words are removed.
+3. **Stemming** -- words are reduced to their root form using **Sastrawi**.
+4. **TF-IDF vectorization** -- each term is weighted across the 101-document corpus.
+5. **Cosine Similarity** -- the angle between the query vector and every document vector is measured.
+6. **Ranking** -- results are sorted by relevance weight; the top 5 are returned.
+7. **Fuzzy fallback** -- when no match is found, **FuzzyWuzzy/RapidFuzz** suggests the closest
    food names ("Did you mean...?").
 
 ---
 
 ## Files
 
-- **[README.md](README.md)** â€” the file you are currently reading.
-- **[requirements.txt](requirements.txt)** â€” Python dependencies.
-- **[manage.py](manage.py)** â€” Django management entry point.
-- **[vercel.json](vercel.json)** â€” deployment config for Vercel.
-- **[config/](config/)** â€” Django project settings
-  - `settings/base.py` â€” shared settings.
-  - `settings/local.py` â€” development (MySQL/XAMPP).
-  - `settings/production.py` â€” production (Supabase PostgreSQL).
-  - `urls.py`, `wsgi.py`, `asgi.py` â€” routing & entry points.
-- **[webapp/](webapp/)** â€” the main application
-  - `services/search.py` â€” TF-IDF & Cosine Similarity engine.
-  - `models.py` â€” `Makanan` database model.
-  - `views.py` â€” controllers for search, data list, and team pages.
-  - `urls.py` â€” URL patterns.
-  - `templates/webapp/` â€” Jinja/HTML templates.
-  - `static/webapp/images/` â€” logo & image assets.
-- **[scripts/](scripts/)** â€” utility scripts (DB seeding, Supabase SQL).
-- **[data/](data/)** â€” database backups and SQL dumps.
-- **[STKI_SearchEngine/](STKI_SearchEngine/)** â€” legacy settings package.
+- **[README.md](README.md)** -- the file you are currently reading.
+- **[requirements.txt](requirements.txt)** -- Python dependencies.
+- **[manage.py](manage.py)** -- Django management entry point.
+- **[vercel.json](vercel.json)** -- deployment config for Vercel.
+- **[config/](config/)** -- Django project settings
+  - `settings/base.py` -- shared settings.
+  - `settings/local.py` -- development (MySQL/XAMPP).
+  - `settings/production.py` -- production (Supabase PostgreSQL).
+  - `urls.py`, `wsgi.py`, `asgi.py` -- routing & entry points.
+- **[webapp/](webapp/)** -- the main application
+  - `services/search.py` -- TF-IDF & Cosine Similarity engine.
+  - `models.py` -- `Makanan` database model.
+  - `views.py` -- controllers for search, data list, and team pages.
+  - `urls.py` -- URL patterns.
+  - `templates/webapp/` -- Jinja/HTML templates.
+  - `static/webapp/images/` -- logo & image assets.
+- **[scripts/](scripts/)** -- utility scripts (DB seeding, Supabase SQL).
+- **[data/](data/)** -- database backups and SQL dumps.
+- **[STKI_SearchEngine/](STKI_SearchEngine/)** -- legacy settings package.
 
 ---
 
@@ -143,7 +143,7 @@ From the search page you can:
 
 1. Type a **food name**, ingredient, or keyword (e.g. *rendang*, *sambal*, *coconut milk*).
 2. View **ranked results** with relevance weight scores.
-3. Browse the **Data** page â€” paginated list of all 101 Indonesian dishes.
+3. Browse the **Data** page -- paginated list of all 101 Indonesian dishes.
 4. If nothing matches, review the **"Did you mean...?"** fuzzy suggestions.
 5. Toggle **dark / light mode** for comfortable reading.
 6. Visit the **About Us** page to meet the team (3D flip cards).
@@ -153,15 +153,15 @@ From the search page you can:
 ## Algorithm Flow
 
 ```
-Input Query â†’ Preprocessing â†’ Stemming (Sastrawi) â†’ TF-IDF Vectorization
-                                                            â†“
+Input Query -> Preprocessing -> Stemming (Sastrawi) -> TF-IDF Vectorization
+                                                            |
                                                     Cosine Similarity
-                                                            â†“
+                                                            |
                                               Ranking by weight
-                                                            â†“
+                                                            |
                                                   Top 5 results
-                                                            â†“
-                                              (if empty â†’ Fuzzy Match)
+                                                            |
+                                              (if empty -> Fuzzy Match)
 ```
 
 ---
@@ -175,5 +175,5 @@ and [Sastrawi](https://github.com/sastrawi/sastrawi).
 ---
 
 <p align="center">
-  Made with â¤ï¸ by Tim Gulugulu
+  Made with &#10084; by Tim Gulugulu
 </p>
