@@ -47,30 +47,6 @@ The project was originally built for the *Sistem Temu Kembali Informasi (STKI)* 
 
 ---
 
-## Files
-
-- **[README.md](README.md)** -- the file you are currently reading.
-- **[requirements.txt](requirements.txt)** -- Python dependencies.
-- **[manage.py](manage.py)** -- Django management entry point.
-- **[vercel.json](vercel.json)** -- deployment config for Vercel.
-- **[config/](config/)** -- Django project settings
-  - `settings/base.py` -- shared settings.
-  - `settings/local.py` -- development (MySQL/XAMPP).
-  - `settings/production.py` -- production (Supabase PostgreSQL).
-  - `urls.py`, `wsgi.py`, `asgi.py` -- routing & entry points.
-- **[webapp/](webapp/)** -- the main application
-  - `services/search.py` -- TF-IDF & Cosine Similarity engine.
-  - `models.py` -- `Makanan` database model.
-  - `views.py` -- controllers for search, data list, and team pages.
-  - `urls.py` -- URL patterns.
-  - `templates/webapp/` -- Jinja/HTML templates.
-  - `static/webapp/images/` -- logo & image assets.
-- **[scripts/](scripts/)** -- utility scripts (DB seeding, Supabase SQL).
-- **[data/](data/)** -- database backups and SQL dumps.
-- **[STKI_SearchEngine/](STKI_SearchEngine/)** -- legacy settings package.
-
----
-
 ## Requirements
 
 - **Python 3.11** or **3.12**
